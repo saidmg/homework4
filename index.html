@@ -51,41 +51,46 @@
             display: block;
             margin: 0 auto;
         }
-        #myProgress {padding: 10px;
-  width: 100%;
-  background-color: black;
-}
 
-#myBar {
-  width: 100%;
-  height: 20px;
-  background-color: red;
-  text-align: center;
-  line-height: 20px;
-  color: white;
-}
+        #myProgress {
+            padding: 10px;
+            width: 100%;
+            background-color: black;
+        }
+
+        #myBar {
+            width: 100%;
+            height: 20px;
+            background-color: red;
+            text-align: center;
+            line-height: 20px;
+            color: white;
+        }
     </style>
 
     <h2>Online Quizz About Canada</h2>
     <!-- <div id="box" class="box"></div> -->
     <!-- <div id="quizzTiming" style="text-align: center;">60</div> -->
     <div class="row">
-        <div class="col-3"></div>      
-          <div class="col-6"><div id="myProgress">
-            <div id="myBar">1 Minute Timer</div>
-          </div></div>
+        <div class="col-3"></div>
+        <div class="col-6">
+            <div id="myProgress">
+                <div id="myBar">1 Minute Timer</div>
+            </div>
+        </div>
         <div class="col-3"></div>
 
     </div>
 
-  
+
     <!-- <div id="quizzTiming2" style="color:red"></div> -->
     <div class="container">
         <div class="row box question1 " id="box1">
             <!-- <button onclick="hideQuestion()" id="button1">Start The Quizz</button> -->
-            <div class="col-3"></div>      
-            <div class="col-6"><button onclick="hideQuestion()" id="button1" style="width: 100%;">Start The Quizz</button></div>
-          <div class="col-3"></div>
+            <div class="col-3"></div>
+            <div class="col-6"><button onclick="hideQuestion()" id="button1" style="width: 100%;">Start The
+                    Quizz</button></div>
+            <div class="col-3"></div>
 
 
         </div>
@@ -108,25 +113,26 @@
 
     <script type="text/javascript">
         var quizzQuestions = {
-            quest2: { question: "The capital city of Canada is:", answer1: "Ottawa", answer2: "Montreal", answer3: "Toronto" },
-            quest3: { question: "The largest city in Canada is:", answer1: "Vancouver", answer2: "Toronto", answer3: "Montreal" },
-            quest4: { question: "Canada has _____ provinces.", answer1: 12, answer2: 10, answer3: 15 },
-            quest5: { question: "The smallest province in Canada is:", answer1: "Prince Edward Island", answer2: "New Brunswick", answer3: "Manitoba", },
-            quest6: { question: "The animal which is a symbol of Canada is the:", answer1: "grizzly bear", answer2: "beaver", answer3: "killer whale" },
-            quest7: { question: "The leader of Canada is known as the:", answer1: "prime minister", answer2: "president", answer3: "premier" },
-            quest8: { question: "The current prime minister of Canada is:", answer1: "Justin Trudeau", answer2: "Doug Ford", answer3: "Pierre Trudeau" },
-            quest9: { question: "Canada became a country in the year:", answer1: "1467", answer2: "1667", answer3: "1867" },
-            quest10: { question: "The third most commonly spoken language in Canada is:", answer1: "Hindi", answer2: "Mandarin", answer3: "Inuktitut" },
-            quest11: { question: "Canada's birthday is on:", answer1: "August 4th", answer2: "January 3rd", answer3: " July 1st" },
+            quest2: { question: "The capital city of Canada is:", answer1: "Ottawa", answer2: "Montreal", answer3: "Toronto", correctAnswer: "Ottawa" },
+            quest3: { question: "The largest city in Canada is:", answer1: "Vancouver", answer2: "Toronto", answer3: "Montreal", correctAnswer: "Toronto" },
+            quest4: { question: "Canada has _____ provinces.", answer1: 12, answer2: 10, answer3: 15, correctAnswer: 10 },
+            quest5: { question: "The smallest province in Canada is:", answer1: "Prince Edward Island", answer2: "New Brunswick", answer3: "Manitoba", correctAnswer: "Prince Edward Island" },
+            quest6: { question: "The animal which is a symbol of Canada is the:", answer1: "grizzly bear", answer2: "beaver", answer3: "killer whale", correctAnswer: "beaver" },
+            quest7: { question: "The leader of Canada is known as the:", answer1: "prime minister", answer2: "president", answer3: "premier", correctAnswer: "prime minister" },
+            quest8: { question: "The current prime minister of Canada is:", answer1: "Justin Trudeau", answer2: "Doug Ford", answer3: "Pierre Trudeau", correctAnswer: "Justin Trudeau" },
+            quest9: { question: "Canada became a country in the year:", answer1: "1467", answer2: "1667", answer3: "1867", correctAnswer: "1867" },
+            quest10: { question: "The third most commonly spoken language in Canada is:", answer1: "Hindi", answer2: "Mandarin", answer3: "Inuktitut", correctAnswer: "Mandarin" },
+            quest11: { question: "Canada's birthday is on:", answer1: "August 4th", answer2: "January 3rd", answer3: "July 1st", correctAnswer: "July 1st" },
         }
 
         var counter = 1;
         var questionCounter = "quest" + (counter + 1);
         var btn;
         var box;
-       
+        var i = 0;
+        var Score = 0;
         function hideQuestion() {
-            if(counter ===1){            move();}
+            if (counter === 1) { move(); }
             box = document.querySelector(`.question${counter}`),
                 // btn = document.querySelector(`#question${counter}`);
                 btn = document.querySelector(`#button${counter}`);
@@ -134,6 +140,8 @@
             // btn.addEventListener('click', function () {
 
             if (counter == 10) {
+                quizzScore();
+                counter++;
                 box.classList.add('visuallyhidden');
                 box.addEventListener('transitionend', function (e) {
                     box.classList.add('hidden');
@@ -145,7 +153,9 @@
                 console.log(`counter is ${counter}`)
                 var test2 = document.querySelector(`.finished`)
                 test2.innerHTML = `
-                <p>Congratulations You Finished !</p>
+                <h3>Congratulations You Finished !</h3>
+                <h2> Score: ${Score}</h2>
+                <button class="button"> Add HighScore</button>
                 
                 `
                 test2.classList.remove('hidden');
@@ -153,8 +163,8 @@
                     test2.classList.remove('visuallyhidden');
                 }, 1000);
 
+            } else {            quizzScore();
 
-            } else {
                 box.classList.add('visuallyhidden');
                 box.addEventListener('transitionend', function (e) {
                     box.classList.add('hidden');
@@ -168,12 +178,9 @@
                 test.innerHTML = `
                 <p>${quizzQuestions[questionCounter].question}</p>
                 <div id="question${counter}">
-                    <input type="radio" id="answer1" name="answer" >
-                    <label for="answer1">${quizzQuestions[questionCounter].answer1}</label><br>
-                    <input type="radio" id="answer2" name="answer" >
-                    <label for="answer2">${quizzQuestions[questionCounter].answer2}</label><br>
-                    <input type="radio" id="answer3" name="answer" >
-                    <label for="answer3">${quizzQuestions[questionCounter].answer3}</label> <br><br>
+                    <input type="radio" id="answer${counter}1" name="answer" value="${quizzQuestions[questionCounter].answer1}">${quizzQuestions[questionCounter].answer1}<br>
+                    <input type="radio" id="answer${counter}2" name="answer" value="${quizzQuestions[questionCounter].answer2}">${quizzQuestions[questionCounter].answer2}<br>
+                    <input type="radio" id="answer${counter}3" name="answer" value="${quizzQuestions[questionCounter].answer3}">${quizzQuestions[questionCounter].answer3}<br><br>
                     <button onclick="hideQuestion()" id="button${counter}">Submit This Answer</button>   
                 `
                 test.classList.remove('hidden');
@@ -182,50 +189,65 @@
                 }, 1000);
             }
         };
-        var i = 0;
-function move() {
-  if (i == 0) {
-    i = 1;
-    var elem = document.getElementById("myBar");
-    var width = 100;
-    var id = setInterval(frame, 560);
-    function frame() {
-      if (width <= 0) {
-        clearInterval(id);
-        i = 0;
-      } else {
-        width--;
-        elem.style.width = width + "%";
-        elem.innerHTML = width  + "%";
-      }
-    }
-  }
-}
-//    function quizzCounter(){
-    // var myInterval = setInterval(function(){
-    // timer= document.getElementById('quizzTiming')
-    // timer.textContent -= 1;
-    // time = timer.textContent;
-    // timer2= document.getElementById('quizzTiming2')
-    // timer2.textContent += '////';
-    // time1 = timer2.textContent;
-    // if (time <= -1){
-    //     time=0
-    //     alert("Game Over");
-    //     clearInterval(myInterval);
-    // }
-    // }, 1000);
+        function move() {
+            if (i == 0) {
+                i = 1;
+                var elem = document.getElementById("myBar");
+                var width = 100;
+                var id = setInterval(frame, 560);
+                function frame() {
+                    if (width <= 0 ||counter==11) {
+                        clearInterval(id);
+                        i = 0;
+                    } else {
+                        width--;
+                        elem.style.width = width + "%";
+                        elem.innerHTML = width + "%";
+                    }
+                }
+            }
+        }
+        function quizzScore() {
 
-//     var myInterval2 = setInterval(function(){
-// timer2= document.getElementById('quizzTiming2')
-//     timer2.textContent += '////';
-//     time = timer2.textContent;
-//     if (time <= 0){
-//         alert("Game Over");
-//         clearInterval(myInterval2);
-//     }
-//     }, 1000);
-// }
+            if(counter>=2){
+            for (var i = 1; i < 4; i++) {
+                var b = document.getElementById(`answer${counter}${i}`)
+                if (b.checked) {
+                    console.log(b.value)
+                    if (b.value == quizzQuestions[questionCounter].correctAnswer) {
+                        console.log(`${b.value} is a correct answer!`)
+                        Score += 10
+                        console.log(Score)
+                    }
+                }
+            }}
+        }
+
+        // var rbs;
+
+            //  rbs = document.querySelectorAll('input[name="answer"]');
+            // let selectedValue;
+            // for (const rb of rbs) {
+            //     if (rb.checked) {
+            //         console.log('a checkbox was selected before submiting')
+            //         for (var i = 0; i < 3; i++) {
+            //             if (rbs[i].checked) {
+            //                 var selector = `label[for="answer${i + 1}"]`;
+            //                 var label = document.querySelector(selector);
+            //                 var text = label.innerHTML;
+            //                 console.log(`${text}`)
+            //                 if (text === `${quizzQuestions[questionCounter].correctAnswer}`) {
+            //                 score += 10;
+            //                 console.log(`Score increased by 10 to be equal to ${score}`)
+            //             }
+            //             }
+
+            //         }
+            //     }
+
+            // }
+
+
     </script>
 
 </body>

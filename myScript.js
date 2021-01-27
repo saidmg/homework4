@@ -1,14 +1,14 @@
 var quizzQuestions = {
-    quest2: { question: "The capital city of Canada is:", answer1: "Ottawa", answer2: "Montreal", answer3: "Toronto", correctAnswer: "Ottawa" },
-    quest3: { question: "The largest city in Canada is:", answer1: "Vancouver", answer2: "Toronto", answer3: "Montreal", correctAnswer: "Toronto" },
-    quest4: { question: "Canada has _____ provinces.", answer1: 12, answer2: 10, answer3: 15, correctAnswer: 10 },
-    quest5: { question: "The smallest province in Canada is:", answer1: "Prince Edward Island", answer2: "New Brunswick", answer3: "Manitoba", correctAnswer: "Prince Edward Island" },
-    quest6: { question: "The animal which is a symbol of Canada is the:", answer1: "grizzly bear", answer2: "beaver", answer3: "killer whale", correctAnswer: "beaver" },
-    quest7: { question: "The leader of Canada is known as the:", answer1: "prime minister", answer2: "president", answer3: "premier", correctAnswer: "prime minister" },
-    quest8: { question: "The current prime minister of Canada is:", answer1: "Justin Trudeau", answer2: "Doug Ford", answer3: "Pierre Trudeau", correctAnswer: "Justin Trudeau" },
-    quest9: { question: "Canada became a country in the year:", answer1: "1467", answer2: "1667", answer3: "1867", correctAnswer: "1867" },
-    quest10: { question: "The third most commonly spoken language in Canada is:", answer1: "Hindi", answer2: "Mandarin", answer3: "Inuktitut", correctAnswer: "Mandarin" },
-    quest11: { question: "Canada's birthday is on:", answer1: "August 4th", answer2: "January 3rd", answer3: "July 1st", correctAnswer: "July 1st" },
+    quest2: { question: "Which event fires whenever a control loses focus?", answer1: "onclick", answer2: "onblur", answer3: "onmove", correctAnswer: "onblur" },
+    quest3: { question: "Which of the following type of variable is visible only within a function where it is defined?", answer1: "global variable", answer2: "local variable", answer3: "Both of the above", correctAnswer: "local variable" },
+    quest4: { question: "Which of the following code creates an object?", answer1: "var book = Object();", answer2: "var book = new Object();", answer3: "var book = new OBJECT();", correctAnswer:"var book = new Object();" },
+    quest5: { question: "Which of the following function of Array object adds one or more elements to the end of an array and returns the new length of the array?", answer1: "pop()", answer2: "join()", answer3: "push()", correctAnswer: "push()" },
+    quest6: { question: "What does the following expression return? 1 + 5 + ” bottles of milk”;", answer1: "15 bottles of milk", answer2: "6 bottles of milk", answer3: "undefined. An exception is thrown", correctAnswer: "6 bottles of milk" },
+    quest7: { question: "Which of these is a correct method to create a new array?", answer1: "var myArray = ();", answer2: "var myArray = [];", answer3: "var myArray = new Array[];", correctAnswer: "var myArray = [];" },
+    quest8: { question: "Which of these is not a logical operator?", answer1: "!", answer2: "&", answer3: "||", correctAnswer: "&" },
+    quest9: { question: "What is the value of x? var a = false; var x = a ? “A” : “B”;", answer1: "false", answer2: "“A”", answer3: "“B”", correctAnswer: "“B”" },
+    quest10: { question: "Which of the following variable types does not exist in JavaScript?", answer1: "number", answer2: "double", answer3: "object", correctAnswer: "double" },
+    quest11: { question: "How do you write a conditional statement that will *only* execute the contained code if variable x has a value 5 of type *number*?", answer1: "if (x == 5) { … }", answer2: "if x = 5 …", answer3: "if (x === 5) { … }", correctAnswer: "if (x === 5) { … }" },
 }
 
 var counter = 1;
@@ -42,7 +42,7 @@ function hideQuestion() {
         <div class="input-group mb-6 score-button" >
             <button onclick ="saveScore()" class="btn btn-outline-secondary" type="button" id="button-addon1">Submit Your Name</button>
             <input type="text" class="form-control" id="scoreName" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-            </div><p id="alert" style="background-color:#e94545; color:white ;width:40%; margin:auto;">Please Write Your Name</p>
+            </div><p id="alert" style="color:white ;width:70%; margin:auto;">Please Write Your Name</p>
 
         
         `
@@ -110,12 +110,13 @@ function hideQuestion() {
         }
     }
 };
+var width;
 function move() {
     if (i == 0) {
         i = 1;
         var elem = document.getElementById("myBar");
-        var width = 100;
-        var id = setInterval(frame, 560);
+         width = 100;
+        var id = setInterval(frame, 584 );
         function frame() {
             if (width <= 0 || counter == 11) {
                 if (width <= 0) {
@@ -139,7 +140,7 @@ function move() {
         <div class="input-group mb-6 score-button" >
             <button onclick ="saveScore()" class="btn btn-outline-secondary" type="button" id="button-addon1">Submit Your Name</button>
             <input type="text" class="form-control" id="scoreName" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-            </div><p id="alert" style="background-color:#e94545; color:white ;width:40%; margin:auto;">Please Write Your Name</p>
+            </div><p id="alert" style=" color:white ;width:70%; margin:auto;">Please Write Your Name</p>
 
         
         `
@@ -172,16 +173,17 @@ function quizzScore() {
                         document.getElementById("answerOutput").classList.remove('wrong');
                     }
                     document.getElementById("answerOutput").classList.add("correct");
-                    document.getElementById("answerOutput").innerText = `' ${b.value} ' is a correct answer!`
+                    document.getElementById("answerOutput").innerText = `' ${b.value} ' is a correct answer! => Score increased by 10 pts`
                     Score += 10
                     console.log(Score)
                 }
                 else {
                     document.getElementById("answerOutput").classList.add("wrong");
+                    width = width-5;
                     if (document.getElementById("answerOutput").classList.contains("correct")) {
                         document.getElementById("answerOutput").classList.remove('correct');
                     }
-                    document.getElementById("answerOutput").innerText = `' ${b.value} ' is a Wrong answer!`
+                    document.getElementById("answerOutput").innerText = `' ${b.value} ' is a Wrong answer! => Time decreased by 5 %`
                 }
             }
         }

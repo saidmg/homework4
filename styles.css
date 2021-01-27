@@ -1,0 +1,115 @@
+        h1,
+        h3 {
+            text-align: center;
+        }
+
+        .box {
+          
+            margin: 30px auto;
+            transition: all 1s linear;
+        }
+
+        body {
+            font-family: sans-serif;
+            background-color: #f9fbfd;
+            background-image: url('./Assets/wallpaper5.png');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            height: 100%;
+            width: 100%;
+        }
+
+        .row {
+            text-align: center;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .visuallyhidden {
+            opacity: 0;
+        }
+
+        .accordion-button:not(.collapsed)::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+            transform: rotate(180deg);
+        }
+
+        @media only screen and (min-width: 800px) {
+            /* Medium and Large devices (laptops/desktops, 800px and up) */
+
+            .accordion-body2 {
+                padding: 1rem 43%;
+            }
+
+            .accordion-button {
+                display: block;
+            }
+
+            .score-button {
+                width: 40%;
+                margin: auto;
+            }
+        }
+
+        @media only screen and (max-width: 799px) {
+            /* small devices (laptops/desktops, 800px and up) */
+
+            .score-button {
+                width: 100%;
+                margin: auto;
+            }
+        }
+
+
+        button {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .accordion-button:not(.collapsed) {
+            color: #d52c2c;
+            background-color: transparent;
+        }
+       
+        .accordion-button:focus {
+            z-index: 3;
+            border-color: red;
+            outline: 0;
+            box-shadow: 0 0 0 0.25rem rgb(231 67 67);
+        }
+
+        .accordion-collapse1 {
+            border: solid rgba(0, 0, 0, .125);
+            background-color: #e94545;
+            border-width: 0 1px;
+        }
+
+        .accordion-flush .accordion-item:first-of-type .accordion-button {
+            background-color: transparent;
+        }
+
+        #myProgress {
+            padding: 10px;
+            width: 100%;
+            background-color: rgb(233, 83, 83);
+        }
+
+        .correct {
+            color: green;
+        }
+
+        .wrong {
+            color: red;
+        }
+        .input-group .btn{color: black;}
+        #myBar {
+            width: 100%;
+            height: 20px;
+            background-color: white;
+            text-align: center;
+            line-height: 20px;
+            color: black;
+        }

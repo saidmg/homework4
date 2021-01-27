@@ -1,27 +1,19 @@
 # homework4
-Quizz Code
+Online Coding Quizz
 
 ## About
 
 A timed coding quiz on Javascript with multiple-choice questions. It has an instruction and a highscore tabs. This app will run in the browser and will feature dynamically updated HTML and CSS powered by JavaScript code.
-## Mock-Up
-
-The following animation demonstrates the application functionality:
-
-![A user clicks through an interactive coding quiz, then enters initials to save the high score before resetting and starting over.](./Assets/04-web-apis-homework-demo.gif)
-
 
 # Sample Pictures
 * Screenshots are available inside ./assets/screenshots/ for more details
-![GitHub Logo](/Assets/screenshots/display_1.jpeg)
-![GitHub Logo](/Assets/screenshots/display_2.jpeg)
-![GitHub Logo](/Assets/screenshots/display_3.jpeg)
-![GitHub Logo](/Assets/screenshots/display_4.jpeg)
-![GitHub Logo](/Assets/screenshots/mobile_screen_display.jpeg)
+![GitHub Logo](/Assets/images/Capture.jpg)
+![GitHub Logo](/Assets/images/Capture2.jpg)
+
 
 # URLS
-* The URLs of the deployed applications:  https://saidmg.github.io/homework3/
-* The URLs of the GitHub repositories  :  https://github.com/saidmg/homework3.git
+* The URLs of the deployed applications:  https://saidmg.github.io/homework4/
+* The URLs of the GitHub repositories  :  https://github.com/saidmg/homework4.git
 
 ## User Story
 

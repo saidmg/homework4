@@ -18,7 +18,8 @@
     <style>
         /* body{background-color:black; color:white; */
         /* } */
-        h2 {
+        h1,
+        h3 {
             text-align: center;
         }
 
@@ -35,6 +36,18 @@
             border: 3px solid black;
         } */
 
+        body {
+            font-family: sans-serif;
+            background-color: #f9fbfd;
+            background-image: url('./Assets/wallpaper5.png');
+            /* Set a background image for the website */
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            height: 100%;
+            width: 100%;
+        }
+
         .row {
             text-align: center;
         }
@@ -47,28 +60,141 @@
             opacity: 0;
         }
 
+        .accordion-button:not(.collapsed)::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+            transform: rotate(180deg);
+        }
+
+        @media only screen and (min-width: 800px) {
+            /* Medium and Large devices (laptops/desktops, 800px and up) */
+
+            .accordion-body2 {
+                padding: 1rem 41%;
+            }
+
+            .accordion-button {
+                display: block;
+            }
+
+            .score-button {
+                width: 40%;
+                margin: auto;
+            }
+        }
+
+        @media only screen and (max-width: 799px) {
+            /* Medium and Large devices (laptops/desktops, 800px and up) */
+
+            .score-button {
+                width: 100%;
+                margin: auto;
+            }
+        }
+
+
         button {
             display: block;
             margin: 0 auto;
         }
 
+        .accordion-button:not(.collapsed) {
+            color: #d52c2c;
+            background-color: transparent;
+        }
+
+        .accordion-button:focus {
+            z-index: 3;
+            border-color: red;
+            outline: 0;
+            box-shadow: 0 0 0 0.25rem rgb(231 67 67);
+        }
+
+        .accordion-collapse1 {
+            border: solid rgba(0, 0, 0, .125);
+            background-color: #e94545;
+            border-width: 0 1px;
+        }
+
+        .accordion-flush .accordion-item:first-of-type .accordion-button {
+            background-color: transparent;
+        }
+
         #myProgress {
             padding: 10px;
             width: 100%;
-            background-color: black;
+            background-color: rgb(233, 83, 83);
+        }
+
+        .correct {
+            color: green;
+        }
+
+        /* .score-button {
+            width: 100%;
+            margin: auto;
+        } */
+
+        .wrong {
+            color: red;
         }
 
         #myBar {
             width: 100%;
             height: 20px;
-            background-color: red;
+            background-color: white;
             text-align: center;
             line-height: 20px;
-            color: white;
+            color: black;
         }
     </style>
 
-    <h2>Online Quizz About Canada</h2>
+    <h1>Online Quizz About Canada</h1>
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    <h4>Instructions</h4>
+                </button>
+            </h2>
+            <div id="flush-collapseOne" class="accordion-collapse accordion-collapse1 collapse"
+                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    <h5>This is a quizz about some general knowledge regarding Canada.
+                        There will be a timer of 60 seconds just after you click the Start button.
+                        If you answer correctly your score increases by 10 points whereas if you answer wrong
+                        your timer is reduced by 10 seconds!
+                        Once you answer a question you can't return back to it . Good Luck!</h5>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingTwo">
+                <button onclick="saveScoreBefore()" class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    <h4>HighScore</h4>
+                </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body accordion-body2">
+                    <h5>
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-header">
+                                HighScores
+                            </div>
+                            <ul class="list-group list-group-flush" id="list-group">
+                               
+                            </ul>
+                        </div>
+                    </h5>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br>
+
     <!-- <div id="box" class="box"></div> -->
     <!-- <div id="quizzTiming" style="text-align: center;">60</div> -->
     <div class="row">
@@ -81,7 +207,9 @@
         <div class="col-3"></div>
 
     </div>
-
+    <div>
+        <p id="answerOutput" style="text-align: center;"> </p>
+    </div>
 
     <!-- <div id="quizzTiming2" style="color:red"></div> -->
     <div class="container">
@@ -155,7 +283,11 @@
                 test2.innerHTML = `
                 <h3>Congratulations You Finished !</h3>
                 <h2> Score: ${Score}</h2>
-                <button class="button"> Add HighScore</button>
+                <div class="input-group mb-6 score-button" >
+                    <button onclick ="saveScore()" class="btn btn-outline-secondary" type="button" id="button-addon1">Enter Your Name</button>
+                    <input type="text" class="form-control" id="scoreName" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                    </div>
+
                 
                 `
                 test2.classList.remove('hidden');
@@ -163,7 +295,8 @@
                     test2.classList.remove('visuallyhidden');
                 }, 1000);
 
-            } else {            quizzScore();
+            } else {
+                quizzScore();
 
                 box.classList.add('visuallyhidden');
                 box.addEventListener('transitionend', function (e) {
@@ -196,7 +329,7 @@
                 var width = 100;
                 var id = setInterval(frame, 560);
                 function frame() {
-                    if (width <= 0 ||counter==11) {
+                    if (width <= 0 || counter == 11) {
                         clearInterval(id);
                         i = 0;
                     } else {
@@ -209,44 +342,74 @@
         }
         function quizzScore() {
 
-            if(counter>=2){
-            for (var i = 1; i < 4; i++) {
-                var b = document.getElementById(`answer${counter}${i}`)
-                if (b.checked) {
-                    console.log(b.value)
-                    if (b.value == quizzQuestions[questionCounter].correctAnswer) {
-                        console.log(`${b.value} is a correct answer!`)
-                        Score += 10
-                        console.log(Score)
+            if (counter >= 2) {
+                for (var i = 1; i < 4; i++) {
+                    var b = document.getElementById(`answer${counter}${i}`)
+                    if (b.checked) {
+                        console.log(b.value)
+                        if (b.value == quizzQuestions[questionCounter].correctAnswer) {
+                            console.log(`${b.value} is a correct answer!`)
+                            if (document.getElementById("answerOutput").classList.contains("wrong")) {
+                                document.getElementById("answerOutput").classList.remove('wrong');
+                            }
+                            document.getElementById("answerOutput").classList.add("correct");
+                            document.getElementById("answerOutput").innerText = `' ${b.value} ' is a correct answer!`
+                            Score += 10
+                            console.log(Score)
+                        }
+                        else {
+                            document.getElementById("answerOutput").classList.add("wrong");
+                            if (document.getElementById("answerOutput").classList.contains("correct")) {
+                                document.getElementById("answerOutput").classList.remove('correct');
+                            }
+                            document.getElementById("answerOutput").innerText = `' ${b.value} ' is a Wrong answer!`
+                        }
                     }
                 }
-            }}
+            }
         }
+        // var justOnce=1
+        var testObject ={}
+        var nbrOfTimes
+        var arraytest =[]
+        function saveScoreBefore(){
+            // if(justOnce===1){
+                if(localStorage.getItem('arraytest')){
+            var retrievedObject = localStorage.getItem('arraytest');
+            for(var t =0 ;t<JSON.parse(retrievedObject).length;t++){
+            var theName = JSON.parse(retrievedObject)[t].quiz.name   ;
+            var theScore = JSON.parse(retrievedObject)[t].quiz.score;
+            const li = document.createElement('li')
+            li.setAttribute('class', 'list-group-item')
+             li.textContent = `${theName}  : ${theScore} pts`
+             document.getElementById('list-group').appendChild(li)}
+            // justOnce++
+        }}
+        // }
+        function saveScore(){
+            // var testObject = { 'quiz1': {'name':'saidMghabghab', 'score':80}, quiz2:{'name':'safsag', 'score':50},
+            //            quiz3:{'name':'sagsagag', 'score':90} }
+            var userName= document.getElementById('scoreName').value
+            if(localStorage.getItem('arraytest'))
+            {
+                var retrievedObject = localStorage.getItem('arraytest');
+                arraytest = JSON.parse(retrievedObject)
+            }
+            arraytest.push({ 'quiz': {'name':`${userName}`, 'score':`${Score}`}});
 
-        // var rbs;
-
-            //  rbs = document.querySelectorAll('input[name="answer"]');
-            // let selectedValue;
-            // for (const rb of rbs) {
-            //     if (rb.checked) {
-            //         console.log('a checkbox was selected before submiting')
-            //         for (var i = 0; i < 3; i++) {
-            //             if (rbs[i].checked) {
-            //                 var selector = `label[for="answer${i + 1}"]`;
-            //                 var label = document.querySelector(selector);
-            //                 var text = label.innerHTML;
-            //                 console.log(`${text}`)
-            //                 if (text === `${quizzQuestions[questionCounter].correctAnswer}`) {
-            //                 score += 10;
-            //                 console.log(`Score increased by 10 to be equal to ${score}`)
-            //             }
-            //             }
-
-            //         }
-            //     }
-
-            // }
-
+            // testObject = { ...testObject, ...{ 'quiz2': {'name':`${userName}`, 'score':`${Score}`}}
+// }
+            // testObject.push({ 'quiz2': {'name':`${userName}`, 'score':`${Score}`}})
+            localStorage.setItem('arraytest', JSON.stringify(arraytest));
+         
+            // var retrievedObject = localStorage.getItem('arraytest');
+            // var theName = JSON.parse(retrievedObject)[0].quiz.name;
+            // const li = document.createElement('li')
+            // li.setAttribute('class', 'list-group-item')
+            //  li.textContent = `${theName}  : ${Score} pts`
+            //  document.getElementById('list-group').appendChild(li)
+                    
+}
 
     </script>
 

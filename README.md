@@ -8,7 +8,7 @@ A timed coding quiz on Javascript with multiple-choice questions. It has an inst
 # Sample Pictures
 * Screenshots are available inside ./assets/screenshots/ for more details
 ![GitHub Logo](/Assets/images/Capture.JPG)
-![GitHub Logo](/Assets/images/Capture2.JPG)
+![GitHub Logo](/Assets/images/capture2.JPG)
 
 
 # URLS

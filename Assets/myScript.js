@@ -10,14 +10,22 @@ var quizzQuestions = {
     quest10: { question: "Which of the following variable types does not exist in JavaScript?", answer1: "number", answer2: "double", answer3: "object", correctAnswer: "double" },
     quest11: { question: "How do you write a conditional statement that will *only* execute the contained code if variable x has a value 5 of type *number*?", answer1: "if (x == 5) { … }", answer2: "if x = 5 …", answer3: "if (x === 5) { … }", correctAnswer: "if (x === 5) { … }" },
 }
-
+var clickcount=1;
 var counter = 1;
 var questionCounter = "quest" + (counter + 1);
 var btn;
 var box;
 var i = 0;
 var Score = 0;
+var myVar ;
+function timerr(){
+    clickcount--; 
+    clearInterval(myVar)
+}
 function hideQuestion() {
+    if (clickcount < 2) {
+        
+        clickcount++;
     if (counter === 1) { move(); }
     box = document.querySelector(`.question${counter}`),
         btn = document.querySelector(`#button${counter}`);
@@ -50,6 +58,8 @@ function hideQuestion() {
         setTimeout(function () {
             test2.classList.remove('visuallyhidden');
         }, 1000);
+        myVar = setInterval(timerr,1000);
+
 
     } else {
         quizzScore();
@@ -75,7 +85,9 @@ function hideQuestion() {
             test.classList.remove('hidden');
             setTimeout(function () {
                 test.classList.remove('visuallyhidden');
-            }, 1000);
+            }, 1000);                 myVar = setInterval(timerr,1000);
+
+
         }
         else {
             if (document.getElementById(`answer${counter}1`).checked || document.getElementById(`answer${counter}2`).checked ||
@@ -101,15 +113,26 @@ function hideQuestion() {
                 test.classList.remove('hidden');
                 setTimeout(function () {
                     test.classList.remove('visuallyhidden');
-                }, 1000);
+                }, 1000);                 myVar = setInterval(timerr,1000);
+
+
             }
             else {
                 document.getElementById("answerOutput").classList.add("wrong");
                 document.getElementById("answerOutput").innerHTML = "Please choose one of the answer"
+                myVar = setInterval(timerr,1000);
+
+
             }
         }
-    }
+    }}
 };
+// document.getElementById(`button${counter}`).addEventListener("dblclick", testFunction);
+
+// document.getElementById(`button${counter}`).addEventListener("dblclick", testFunction); 
+// function testFunction(){
+//     alert('it Worked!')
+// }
 var width;
 function move() {
     if (i == 0) {

@@ -34,11 +34,12 @@ THEN I can save my initials and my score
 * The URLs of the GitHub repositories  :  https://github.com/saidmg/homework4.git
 
 # Sample Pictures
-* Screenshots are available inside ./assets/screenshots/ for more details
+* Screenshots are available inside ./assets/images/
+
 ![GitHub Logo](/Assets/images/capture2.JPG)
-![GitHub Logo](/Assets/images/Capture4.jpeg)
-![GitHub Logo](/Assets/images/Capture5.jpeg)
-![GitHub Logo](/Assets/images/Capture6.jpeg)
-![GitHub Logo](/Assets/images/Capture7.jpeg)
+![GitHub Logo](/Assets/images/capture4.jpeg)
+![GitHub Logo](/Assets/images/capture5.jpeg)
+![GitHub Logo](/Assets/images/capture6.jpeg)
+![GitHub Logo](/Assets/images/capture7.jpeg)
 
 

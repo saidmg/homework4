@@ -1,7 +1,7 @@
 var quizzQuestions = {
     quest2: { question: "Which event fires whenever a control loses focus?", answer1: "onclick", answer2: "onblur", answer3: "onmove", correctAnswer: "onblur" },
     quest3: { question: "Which of the following type of variable is visible only within a function where it is defined?", answer1: "global variable", answer2: "local variable", answer3: "Both of the above", correctAnswer: "local variable" },
-    quest4: { question: "Which of the following code creates an object?", answer1: "var book = Object();", answer2: "var book = new Object();", answer3: "var book = new OBJECT();", correctAnswer:"var book = new Object();" },
+    quest4: { question: "Which of the following code creates an object?", answer1: "var book = Object();", answer2: "var book = new Object();", answer3: "var book = new OBJECT();", correctAnswer: "var book = new Object();" },
     quest5: { question: "Which of the following function of Array object adds one or more elements to the end of an array and returns the new length of the array?", answer1: "pop()", answer2: "join()", answer3: "push()", correctAnswer: "push()" },
     quest6: { question: "What does the following expression return? 1 + 5 + ” bottles of milk”;", answer1: "15 bottles of milk", answer2: "6 bottles of milk", answer3: "undefined. An exception is thrown", correctAnswer: "6 bottles of milk" },
     quest7: { question: "Which of these is a correct method to create a new array?", answer1: "var myArray = ();", answer2: "var myArray = [];", answer3: "var myArray = new Array[];", correctAnswer: "var myArray = [];" },
@@ -10,41 +10,41 @@ var quizzQuestions = {
     quest10: { question: "Which of the following variable types does not exist in JavaScript?", answer1: "number", answer2: "double", answer3: "object", correctAnswer: "double" },
     quest11: { question: "How do you write a conditional statement that will *only* execute the contained code if variable x has a value 5 of type *number*?", answer1: "if (x == 5) { … }", answer2: "if x = 5 …", answer3: "if (x === 5) { … }", correctAnswer: "if (x === 5) { … }" },
 }
-var clickcount=1;
+var clickcount = 1;
 var counter = 1;
 var questionCounter = "quest" + (counter + 1);
 var btn;
 var box;
 var i = 0;
 var Score = 0;
-var myVar ;
-function timerr(){
-    clickcount--; 
+var myVar;
+function timerr() {
+    clickcount--;
     clearInterval(myVar)
 }
 function hideQuestion() {
     if (clickcount < 2) {
-        
+
         clickcount++;
-    if (counter === 1) { move(); }
-    box = document.querySelector(`.question${counter}`),
-        btn = document.querySelector(`#button${counter}`);
+        if (counter === 1) { move(); }
+        box = document.querySelector(`.question${counter}`),
+            btn = document.querySelector(`#button${counter}`);
 
 
-    if (counter == 10) {
-        quizzScore();
-        counter++;
-        box.classList.add('visuallyhidden');
-        box.addEventListener('transitionend', function (e) {
-            box.classList.add('hidden');
-        }, {
-            capture: false,
-            once: true,
-            passive: false
-        })
-        console.log(`counter is ${counter}`)
-        var test2 = document.querySelector(`.finished`)
-        test2.innerHTML = `
+        if (counter == 10) {
+            quizzScore();
+            counter++;
+            box.classList.add('visuallyhidden');
+            box.addEventListener('transitionend', function (e) {
+                box.classList.add('hidden');
+            }, {
+                capture: false,
+                once: true,
+                passive: false
+            })
+            console.log(`counter is ${counter}`)
+            var test2 = document.querySelector(`.finished`)
+            test2.innerHTML = `
         <h3>Congratulations You Finished !</h3>
         <h2> Score: ${Score}</h2>
         <div class="input-group mb-6 score-button" >
@@ -54,44 +54,16 @@ function hideQuestion() {
 
         
         `
-        test2.classList.remove('hidden');
-        setTimeout(function () {
-            test2.classList.remove('visuallyhidden');
-        }, 1000);
-        myVar = setInterval(timerr,1000);
-
-
-    } else {
-        quizzScore();
-        if (counter === 1) {
-            box.classList.add('visuallyhidden');
-            box.addEventListener('transitionend', function (e) {
-                box.classList.add('hidden');
-            }, {
-                capture: false,
-                once: true,
-                passive: false
-            }); counter++;
-            questionCounter = "quest" + (counter + 1);
-            var test = document.querySelector(`.question${counter}`)
-            test.innerHTML = `
-        <p>${quizzQuestions[questionCounter].question}</p>
-        <div id="question${counter}">
-            <input type="radio" id="answer${counter}1" name="answer" value="${quizzQuestions[questionCounter].answer1}">${quizzQuestions[questionCounter].answer1}<br>
-            <input type="radio" id="answer${counter}2" name="answer" value="${quizzQuestions[questionCounter].answer2}">${quizzQuestions[questionCounter].answer2}<br>
-            <input type="radio" id="answer${counter}3" name="answer" value="${quizzQuestions[questionCounter].answer3}">${quizzQuestions[questionCounter].answer3}<br><br>
-            <button onclick="hideQuestion()" id="button${counter}">Submit This Answer</button>   
-        `
-            test.classList.remove('hidden');
+            test2.classList.remove('hidden');
             setTimeout(function () {
-                test.classList.remove('visuallyhidden');
-            }, 1000);                 myVar = setInterval(timerr,1000);
+                test2.classList.remove('visuallyhidden');
+            }, 1000);
+            myVar = setInterval(timerr, 1000);
 
 
-        }
-        else {
-            if (document.getElementById(`answer${counter}1`).checked || document.getElementById(`answer${counter}2`).checked ||
-                document.getElementById(`answer${counter}3`).checked) {
+        } else {
+            quizzScore();
+            if (counter === 1) {
                 box.classList.add('visuallyhidden');
                 box.addEventListener('transitionend', function (e) {
                     box.classList.add('hidden');
@@ -113,33 +85,56 @@ function hideQuestion() {
                 test.classList.remove('hidden');
                 setTimeout(function () {
                     test.classList.remove('visuallyhidden');
-                }, 1000);                 myVar = setInterval(timerr,1000);
+                }, 1000); myVar = setInterval(timerr, 1000);
 
 
             }
             else {
-                document.getElementById("answerOutput").classList.add("wrong");
-                document.getElementById("answerOutput").innerHTML = "Please choose one of the answer"
-                myVar = setInterval(timerr,1000);
+                if (document.getElementById(`answer${counter}1`).checked || document.getElementById(`answer${counter}2`).checked ||
+                    document.getElementById(`answer${counter}3`).checked) {
+                    box.classList.add('visuallyhidden');
+                    box.addEventListener('transitionend', function (e) {
+                        box.classList.add('hidden');
+                    }, {
+                        capture: false,
+                        once: true,
+                        passive: false
+                    }); counter++;
+                    questionCounter = "quest" + (counter + 1);
+                    var test = document.querySelector(`.question${counter}`)
+                    test.innerHTML = `
+        <p>${quizzQuestions[questionCounter].question}</p>
+        <div id="question${counter}">
+            <input type="radio" id="answer${counter}1" name="answer" value="${quizzQuestions[questionCounter].answer1}">${quizzQuestions[questionCounter].answer1}<br>
+            <input type="radio" id="answer${counter}2" name="answer" value="${quizzQuestions[questionCounter].answer2}">${quizzQuestions[questionCounter].answer2}<br>
+            <input type="radio" id="answer${counter}3" name="answer" value="${quizzQuestions[questionCounter].answer3}">${quizzQuestions[questionCounter].answer3}<br><br>
+            <button onclick="hideQuestion()" id="button${counter}">Submit This Answer</button>   
+        `
+                    test.classList.remove('hidden');
+                    setTimeout(function () {
+                        test.classList.remove('visuallyhidden');
+                    }, 1000); myVar = setInterval(timerr, 1000);
 
 
+                }
+                else {
+                    document.getElementById("answerOutput").classList.add("wrong");
+                    document.getElementById("answerOutput").innerHTML = "Please choose one of the answer"
+                    myVar = setInterval(timerr, 1000);
+
+
+                }
             }
         }
-    }}
+    }
 };
-// document.getElementById(`button${counter}`).addEventListener("dblclick", testFunction);
-
-// document.getElementById(`button${counter}`).addEventListener("dblclick", testFunction); 
-// function testFunction(){
-//     alert('it Worked!')
-// }
 var width;
 function move() {
     if (i == 0) {
         i = 1;
         var elem = document.getElementById("myBar");
-         width = 100;
-        var id = setInterval(frame, 584 );
+        width = 100;
+        var id = setInterval(frame, 584);
         function frame() {
             if (width <= 0 || counter == 11) {
                 if (width <= 0) {
@@ -202,7 +197,7 @@ function quizzScore() {
                 }
                 else {
                     document.getElementById("answerOutput").classList.add("wrong");
-                    width = width-5;
+                    width = width - 5;
                     if (document.getElementById("answerOutput").classList.contains("correct")) {
                         document.getElementById("answerOutput").classList.remove('correct');
                     }
@@ -250,4 +245,13 @@ function saveScore() {
 
         }
     }
+}
+
+function clearAll(){
+    localStorage.clear()
+    while( document.getElementById('list-group')){
+        document.getElementById('list-group').remove()
+    }
+
+    
 }
